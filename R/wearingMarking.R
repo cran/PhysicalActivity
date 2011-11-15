@@ -23,8 +23,8 @@ function(dataset,
 
     colName = names(data3)
     if(!getMinuteMarking){
-        dataset$key = substring(dataset$TimeStamp, 1, 16)
-        data3$key = substring(data3$TimeStamp, 1, 16)
+        dataset$key = substring(dataset[,names(dataset)[TS ==  names(dataset)]], 1, 16)
+        data3$key = substring(data3[,names(data3)[TS ==  names(data3)]], 1, 16)
         data4 = merge(dataset, data3[c(newcolname, "key")], all.x = TRUE, by = "key")[c(colName)]
     }else{
         data4 = data3[c(colName)]
