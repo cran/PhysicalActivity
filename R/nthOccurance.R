@@ -1,35 +1,36 @@
-`nthOccurance` <-
-function(dataVct, value, nth = NA, reverse = FALSE)
-{
-    loc = c()
-    if(reverse){
-        dataVct = rev(dataVct)
-    }
+#' Internal Function
+#'
+#' This is an internal function, not for users.
+#'
+#' @param dataVct DataVct
+#' @param value Value
+#' @param nth Nth
+#' @param reverse Reverse
+#'
+#' @return loc
+#'
+#' @templateVar author liu
+#' @template auth
+#'
+#' @keywords internal
 
-    if(is.na(value)){
-        value = "NA"
-        dataVct[is.na(dataVct)] = "NA"
+nthOccurance <- function(dataVct, value, nth = NA, reverse = FALSE) {
+    if(reverse) {
+        dataVct <- rev(dataVct)
     }
-
-    temp = 1:length(dataVct)
-    if(length(nth)==1){
-        if( is.na(nth)){
-            loc = temp[match(dataVct, value, nomatch = 0)==1]
-        }else{
-            loc = temp[match(dataVct, value, nomatch = 0)==1][nth]
-        }
-    }else{
-        loc = temp[match(dataVct, value, nomatch = 0)==1][nth]
+    if(is.na(value)) {
+        value <- "NA"
+        dataVct[is.na(dataVct)] <- "NA"
     }
-
-    if(reverse){ 
-        loc = length(dataVct) - loc +1
+    loc <- which(dataVct == value)
+    if(!is.na(nth)) {
+        loc <- loc[nth]
     }
-
-    if(sum(is.na(loc)) == length(loc)){
-        loc = 0
+    if(reverse) {
+        loc <- length(dataVct) - loc + 1
     }
-
-    return(loc)
+    if(all(is.na(loc))) {
+        loc <- 0
+    }
+    loc
 }
-

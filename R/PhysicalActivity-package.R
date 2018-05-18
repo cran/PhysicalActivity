@@ -1,0 +1,84 @@
+#' Process Accelerometer Data for Physical Activity Measurement
+#'
+#' It provides a function \code{\link{wearingMarking}} for classification of monitor
+#' wear and nonwear time intervals in accelerometer data collected to assess
+#' physical activity. The package also contains functions for making plot for
+#' accelerometer data and obtaining the summary of various information including
+#' daily monitor wear time and the mean monitor wear time during valid days.
+#' 
+#' The revised package version 0.2-2 improved the functions in the previous version
+#' regarding speed and robustness. In addition, several functions were added: 
+#' \code{\link{markDelivery}} can classify days for ActiGraph delivery by mail; 
+#' \code{\link{markPAI}} can categorize physical activity intensity level based on
+#' user-defined cut-points of accelerometer counts. It also supports importing ActiGraph
+#' AGD files with \code{\link{readActigraph}} and \code{\link{queryActigraph}} functions.
+#' The package also better supports time zones and daylight saving.
+#'
+#' Classify wear and nonwear time status for accelerometer data by
+#' epoch-by-epoch basis by \code{\link{wearingMarking}}.
+#'
+#' Classify mail delivery and non-delivery day status for accelerometer data 
+#' by \code{\link{markDelivery}}.
+#' 
+#' Three options are available for the package: \code{pa.validCut=600},
+#' \code{pa.timeStamp='TimeStamp'}, and \code{pa.cts='axis1'}. When these 
+#' options are specified (as in \code{\link{markDelivery}}), the other 
+#' functions will automatically respect these values as defaults. For 
+#' instance, the count variable in \code{data(dataSec)} is "counts".
+#' Running \code{options(pa.cts='counts')} allows the user to avoid specifying the 
+#' "cts" argument in \code{\link{wearingMarking}}. The options for \code{validCut} and
+#' \code{timeStamp} are rarely changed.
+#'
+#' Shiny app called \pkg{Actigraph} can be used to visualize accelerometer data
+#' and summarize the data.  Please see \url{https://github.com/couthcommander/PhysicalActivityShiny}.
+#'
+#' @docType package
+#'
+#' @author Leena Choi \email{leena.choi@@Vanderbilt.Edu},
+#' Cole Beck \email{cole.beck@@vumc.org},
+#' Zhouwen Liu \email{zhouwen.liu@@vumc.org},
+#' Charles E. Matthews \email{Charles.Matthews2@@nih.gov}, and
+#' Maciej S. Buchowski \email{maciej.buchowski@@Vanderbilt.Edu}
+#'
+#' Maintainer: Leena Choi \email{leena.choi@@Vanderbilt.Edu}
+#'
+#' @references Choi L, Liu Z, Matthews CE, Buchowski MS. 
+#' Validation of accelerometer wear and nonwear time classification algorithm.
+#' Med Sci Sports Exerc. 2011 Feb;43(2):357-64.
+#'
+#' Choi L, Ward SC, Schnelle JF, Buchowski MS. 
+#' Assessment of wear/nonwear time classification algorithms for triaxial accelerometer.
+#' Med Sci Sports Exerc. 2012 Oct;44(10):2009-16.
+#'
+#' Choi L, Chen KY, Acra SA, Buchowski MS. 
+#' Distributed lag and spline modeling for predicting energy expenditure from 
+#' accelerometry in youth. J Appl Physiol. 2010 Feb;108(2):314-27.
+#'
+#' @keywords accelerometer data process, wear and nonwear classification, 
+#' mail delivery day classification
+#' @importFrom graphics abline plot text mtext
+#' @importFrom stats pt sd qnorm qt quantile
+#'
+#' @examples
+#' data(dataSec)
+#'
+#' mydata1m = dataCollapser(dataSec, TS = "TimeStamp", col = "counts", by = 60)
+#' options(pa.cts = 'counts') # change cnt variable from "axis1" to "counts"
+#' data1m = wearingMarking(dataset = mydata1m, frame = 90)
+#'
+#' sumVct(data1m, id="sdata1m")
+#'
+#' plotData(data=data1m)
+#'
+#' summaryData(data=data1m, validCut=600, perMinuteCts=1, markingString = "w")
+"_PACKAGE"
+
+.onLoad <- function(libname, pkgname) {
+    myopts <- list(
+        pa.validCut = 600,
+        pa.timeStamp = "TimeStamp",
+        pa.cts = "axis1"
+    )
+    options(myopts)
+    invisible()
+}
