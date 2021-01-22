@@ -1,36 +1,54 @@
 Package: PhysicalActivity
-Version: 0.2-2
-Date: 2018-05-18
+Version: 0.2-4
+Date: 2020-12-29
 Title: Process Accelerometer Data for Physical Activity Measurement
-Authors@R: c(person("Leena", "Choi", role = c("aut", "cre"),
-    email = "leena.choi@Vanderbilt.Edu"),
-    person("Cole", "Beck", role = "aut"),
-    person("Zhouwen", "Liu", role = "aut"),
-    person("Charles E.", "Matthews", role = "aut"),
-    person("Maciej S.", "Buchowski", role = "aut"))
+Authors@R: 
+    c(person(given = "Leena",
+             family = "Choi",
+             role = c("aut", "cre"),
+             email = "leena.choi@Vanderbilt.Edu",
+             comment = c(ORCID = "0000-0002-2544-7090")),
+      person(given = "Cole",
+             family = "Beck",
+             role = "aut",
+             email = "cole.beck@vumc.org",
+             comment = c(ORCID = "0000-0002-6849-6255")),
+      person(given = "Zhouwen",
+             family = "Liu",
+             role = "aut"),
+      person(given = "Ryan",
+             family = "Moore",
+             role = "aut",
+             email = "ryan.moore@vumc.org"),
+      person(given = "Charles E.",
+             family = "Matthews",
+             role = "aut"),
+      person(given = "Maciej S.",
+             family = "Buchowski",
+             role = "aut"))
 Description: It provides a function "wearingMarking" for classification of monitor
     wear and nonwear time intervals in accelerometer data collected to assess
     physical activity. The package also contains functions for making plot for 
     accelerometer data and obtaining the summary of various information including 
     daily monitor wear time and the mean monitor wear time during valid days.      
-    The revised package version 0.2-1 improved the functions in the previous version
-    regarding speed and robustness. In addition, several functions were added: 
-    "markDelivery" can classify days for ActiGraph delivery by mail; 
-    "markPAI" can categorize physical activity intensity level based on user-defined 
-    cut-points of accelerometer counts. It also supports importing ActiGraph AGD files 
-    with "readActigraph" and "queryActigraph" functions. The package also better supports
-    time zones and daylight saving.
+    "deliveryPred" and "markDelivery" can classify days for ActiGraph delivery by mail;
+    "deliveryPreprocess" can process accelerometry data for analysis by zeropadding incomplete 
+    days and removing low activity days; "markPAI" can categorize physical activity
+    intensity level based on user-defined cut-points of accelerometer counts. It also
+    supports importing ActiGraph AGD files with "readActigraph" and "queryActigraph" functions.
 License: GPL (>= 3)
 Depends: R (>= 2.10)
-Suggests: RSQLite, DBI
-RoxygenNote: 6.0.1
+Suggests: RSQLite, DBI, data.table, e1071, keras, randomForest,
+        reticulate, rms
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2018-05-18 17:09:28 UTC; leenachoi
-Author: Leena Choi [aut, cre],
-  Cole Beck [aut],
+Packaged: 2021-01-22 17:38:24 UTC; leenachoi
+Author: Leena Choi [aut, cre] (<https://orcid.org/0000-0002-2544-7090>),
+  Cole Beck [aut] (<https://orcid.org/0000-0002-6849-6255>),
   Zhouwen Liu [aut],
+  Ryan Moore [aut],
   Charles E. Matthews [aut],
   Maciej S. Buchowski [aut]
 Maintainer: Leena Choi <leena.choi@Vanderbilt.Edu>
 Repository: CRAN
-Date/Publication: 2018-05-18 22:03:34 UTC
+Date/Publication: 2021-01-22 22:30:02 UTC

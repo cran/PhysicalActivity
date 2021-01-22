@@ -4,14 +4,16 @@
 \name{dataSec}
 \alias{dataSec}
 \title{Accelerometer Data Example}
-\format{A data frame with 238140 observations on the following 2 required
+\format{
+A data frame with 238140 observations on the following 2 required
 variables.
 \describe{
   \item{TimeStamp}{A character vector, timestamp of accelerometer measurements}
   \item{counts}{A numeric vector, counts as accelerometer measurements}
-}}
+}
+}
 \usage{
-dataSec
+data(dataSec)
 }
 \description{
 Approximately 3 days of accelerometer data collected with 1-sec epoch in the
